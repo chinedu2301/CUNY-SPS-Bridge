@@ -1,0 +1,74 @@
+---
+CUNY SPS Bridge: R section, Assignment 1
+Name: Chinedu Onyeka
+---
+```{r}
+#CUNY SPS Bridge: R section, Assignment 1
+#Name: Chinedu Onyeka
+#Date: July 24th, 2021
+```
+
+```{r}
+#Question 1: Write a loop that calculates 12 factorial
+
+get_factorial <- function(n){
+  result <- 1
+  
+  for(i in 1:n){
+    result = result * i
+  }
+  
+  print(result)
+}
+
+get_factorial(12)
+
+```
+```{r}
+#Question 2: Create a numeric vector that contains the sequence from 20 to 50 by 5
+numVec <- c(seq(20,50,5))
+
+numVec
+```
+
+
+```{r}
+#Problem 3: Function that solves a quadratic equation
+quadratic_equation <- function(a,b,c){
+  #Check if function is quadratic
+  if(a==0){
+    print('The equation is not a quadratic equation')
+  }
+  else{
+  D <- (b^2 - 4*a*c)
+  
+  if(D == 0){
+    #We have real and equal roots
+    x <- (-b/(2*a))
+    sprintf('The roots are real and equal. The solution is: %s',x)
+  }
+  
+  else if(D > 0){
+    #We have real and different roots
+    x1 <- ((-b + D^0.5)/(2*a))
+    x2 <- ((-b - D^0.5)/(2*a))
+    sprintf('The roots are real and different. The solutions are: %s and %s', x1,x2)
+  
+  }
+  
+  else { 
+    #We have 2 complex roots
+    x1 <- complex(real = -b/(2*a), imaginary = (-D)^0.5/(2*a))
+    x2 <- complex(real = -b/(2*a), imaginary = -(-D)^0.5/(2*a))
+    sprintf('The two roots are complex. The solutions are: %s and %s', x1,x2)
+  }
+  }
+}
+
+quadratic_equation(1,4,4)
+quadratic_equation(0,8,4)
+quadratic_equation(1,4,2)
+quadratic_equation(1,2,2)
+quadratic_equation(1,1,1)
+```
+
