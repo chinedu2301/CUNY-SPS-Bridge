@@ -54,7 +54,7 @@ LIMIT 5;
 
 #question: What are the airports that flights originate from? and how many flights originate from each airport?
 
-select origin, COUNT(origin) AS num_flights from flights
+SELECT origin, COUNT(origin) AS num_flights FROM flights
 GROUP BY origin;
 #Flights originate from EWR, LGA, and JFK airports
 
