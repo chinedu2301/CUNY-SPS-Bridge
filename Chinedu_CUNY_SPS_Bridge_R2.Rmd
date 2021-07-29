@@ -1,0 +1,86 @@
+```{r}
+#CUNY SPS Bridge: R section, Assignment 2
+#Name: Chinedu Onyeka
+#Date: July 27th, 2021
+```
+
+```{r}
+#Problem 1: Use the summary function to get an overview of the data set. Then display the mean and median
+#for at least two attributes
+
+#First read the file from its location in github
+affairs_url = "https://github.com/chinedu2301/CUNY-SPS-Bridge/raw/main/Affairs.csv"
+Affairs <- read.table(file=affairs_url, header = TRUE, sep = ",")
+
+head(Affairs)
+```
+
+```{r}
+#Check the summary of the data using the summary function
+summary(Affairs)
+```
+```{r}
+#The mean of the age is 32.49 and the median for the age is 32.0
+#The mean of the yearsmarried is 8.178 and the media for yearsmarried is  7.00
+```
+
+```{r}
+#Problem 2: Create a new data frame with a subset of the columns and rows. Make sure to rename it.
+
+# I created a subset of the Affairs data frame from the 100th - 400th row and the 3rd - 9th column.
+Affairs_subset <- Affairs[100:400, 3:9]
+head(Affairs_subset)
+```
+```{r}
+#Problem 3: Create new column names for the new data frame
+colnames(Affairs_subset) <- c("sex", "age", "numberofyearsmarried", "children", "religiousness", "yearsofeducation", "profession")
+head(Affairs_subset)
+
+#I changed the name of the "gender" column to "sex", "occupation" to "profession", education to "yearsofeducation"
+#and "yearsmarried" to "numberofyearsmarried"
+```
+```{r}
+#Problem 4: Use the summary function to create an overview of the new data frame. 
+#Print the mean and median for the same two attributes. Please compare.
+
+summary(Affairs_subset)
+
+```
+
+```{r}
+#The mean of the age in the Affairs data frame is 32.49, while mean of age in Affairs_subset is 32.35
+#The median of the age in the Affairs data frame is 32.0, while median of age in Affairs_subset is 32.00
+#From the results above, there is no significant difference in the mean and median of the Affairs data when compared to that of the subset (Affairs_subset)
+
+
+#The mean of the yearsmarried in the Affairs data frame is 8.178, while the mean of numberofyearsmarried is 7.751
+#The median of the yearsmarried in the Affairs data frame is 7.0, while the meadian of numberofyearsmarried is 7.0
+#From the results shown above, the median of yearsmarried from the Affairs data frame and that of the numberofyearsmarried in the Affairs_subset data frame are exactly the same while a slight difference exists in their mean values.
+```
+
+
+```{r}
+#Problem 5: For at least 3 values in a column, please rename so that every value in that column is renamed.
+Affairs_subset$sex[Affairs_subset$sex == "male"] <- "M"
+Affairs_subset$sex[Affairs_subset$sex == "female"] <- "F"
+Affairs_subset$children[Affairs_subset$children == "yes"] <- "Y"
+Affairs_subset$children[Affairs_subset$children == "no"] <- "N"
+head(Affairs_subset)
+
+
+#I changed all "male" and "female" in the sex column to M and F respectively.
+#Also, I changed all "yes" and "no" in the children column to Y and N respectively.
+```
+
+```{r}
+#Problem 6: Display enough rows to see examples of all steps 1-5 above
+
+#Answers: Output is shown in each case in 1-5 above.
+```
+
+```{r}
+#Problem 7: Place the original .csv in a github file and have R read from the link.
+
+#Answer: See solution in problem 1
+```
+
