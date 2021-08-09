@@ -1,0 +1,80 @@
+##### **CUNY SPS BRIDGE R Assignment 3 (Final Project)**
+##### **Name: Chinedu Onyeka; Date: August 8th, 2021**  
+
+
+##### **Meaningful Question: I want to use the test data from California Schools to find out if students from higher income households do better in Math and Reading Tests**
+
+
+##### Problem 1: 1. Data Exploration: This should include summary statistics, means, medians, quartiles, or any other relevant information about the data set. Please include some conclusions in the R
+
+```{r}
+#Read the data
+url = "https://github.com/chinedu2301/CUNY-SPS-Bridge/raw/main/CASchools.csv"
+data <- read.table(file = url, header = TRUE, sep = ",")
+head(data)
+```
+```{r}
+summary(data) #summary of the data to view descriptive statistics of the data
+```
+```{r}
+str(data)
+```
+
+##### **The mean math score is 653.3 and the maximum math score is 709.5. The mean income is 15.317 while the maximum income is 55.328.**
+
+
+##### Problem 2: Data wrangling: Please perform some basic transformations. They will need to make sense but could include column renaming, creating a subset of the data, replacing values, or creating new columns with derived data (for example – if it makes sense you could sum two columns together)
+```{r}
+#Install and or load relevant libraries for data wrangling
+library(tidyverse)
+library(ggthemes)
+var <- c("school","grades","income", "teachers", "students","read", "math")
+data <- data %>% as_tibble() %>% select(all_of(var)) %>% arrange(desc(math, read, english)) %>% mutate(teacher_stu = teachers/students)
+#I selected the relevant columns for my analysis
+head(data)
+```
+###### *The school with the highest Math Score is the Los Altos Elementary*  
+```{r}
+any(is.na(data)) #Check for missing values
+```
+###### *There are no missing values in the data set*
+
+##### Problem 3: Graphics: Please make sure to display at least one scatter plot, box plot and histogram. Don’t be limited to this. Please explore the many other options in R packages such as ggplot2.
+```{r}
+#Plot a graph of Income vs Math Score
+pl_Income_Math <- ggplot(data, aes(x = math, y = income)) + geom_point() + stat_smooth(se=FALSE) + labs(x="Math Score", y= "Income", title = "Income vs Math Score") + facet_grid(rows = "grades") + theme_economist()
+print(pl_Income_Math)
+```
+```{r}
+#Plot a graph of Income vs Reading Score
+pl_Income_Read <- ggplot(data, aes(x =read, y = income)) + geom_point() + stat_smooth(se=FALSE) + labs(x="Reading Score", y= "Income", title = "Income vs Reading Score") + facet_grid(rows = "grades")  + theme_economist()
+print(pl_Income_Read)
+```
+```{r}
+#Plot a graph of Math Score vs Teacher-Student Ratio
+pl_Math_TSR <- ggplot(data, aes(x =teacher_stu, y = math)) + geom_point() + stat_smooth(se=FALSE)+ labs(x="Teachers-Students Ratio", y= "Math Score", title = "Math Score vs Teacher-Students Ratio")+theme_economist()
+print(pl_Math_TSR)
+```
+```{r}
+#Correlation between Income and Math Score
+cor_inc_Math <- cor.test(data$math, data$income)
+print("Correlation between Income and Math Scores")
+print(cor_inc_Math)
+cor_inc_Read <- cor_inc_Read <- cor.test(data$read, data$income)
+print("Correlation between Income and Reading Scores")
+print(cor_inc_Read)
+```
+
+##### Problem 4: Meaningful question for analysis: Please state at the beginning a meaningful question for analysis. Use the first three steps and anything else that would be helpful to answer the question you are posing from the data set you chose. Please write a brief conclusion paragraph in R markdown at the end.
+
+##### **Answer: *Conclusion- It can be clearly seen from the graphs that the math and reading scores for California students generally increases for both grades KK-06 and KK-08 as the income level of the household increases. Also, the correlation between Income and Math Scores as well as between Income and Reading Scores of CA School students is about 0.7 which indicates a strong positive correlation between each of the two variables. Hence, I can conclude that students from high income homes have more chances of having a higher Math and Reading scores than their counterparts from low income homes according to data from CA Schools* **
+
+
+##### Problem 5: BONUS – place the original .csv in a github file and have R read from the link. This will be a very useful skill as you progress in your data science education and career.
+
+
+##### **Answer:  *See problem 1* **
+
+
+
+
